@@ -1,8 +1,4 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
+body {  padding: 50px;  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;  }
+a {  color: #00B7FF;  }
+.confirm{border-radius: 3px ;background-color: #00B7FF;padding: 10px;border: none  }
+.table_content{width: 40%;margin: 20px 30%;}
