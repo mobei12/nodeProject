@@ -1,6 +1,6 @@
 //系统参数
 var SYSTEM = {};
-SYSTEM.HOST= 'http://v1.test.shangliuchina.com/';
+SYSTEM.HOST= '';
 
 /**
  * 重写 jQuery post 方法
