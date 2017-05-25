@@ -1,32 +1,40 @@
 doctype html
 html
     head
-      title 测试页
-        //-引入bootstrapCDN
-      link(rel='stylesheet' href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css' crossorigin='anonymous' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u')
-      link(rel='stylesheet', href='/stylesheets/style.css')
-      script(src='/javascripts/jquery-2.1.4.min.js')
-      script(src='/javascripts/common.js')
-      script(type='text/javascript').
-        $(function () {
-        })
-        function select() {
-            var url = "http://localhost:3000/demo/select";
-            $.get(url,function (result) {
-                console.log(result)
-            });
+        title 测试页
+            //-引入bootstrapCDN
+        link(rel='stylesheet' href='https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css' crossorigin='anonymous' integrity='sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u')
+        link(rel='stylesheet', href='/stylesheets/style.css')
+        script(src='/javascripts/jquery-2.1.4.min.js')
+        script(src='/javascripts/common.js')
+        script(type='text/javascript').
+            $(function () {
+            })
 
-        }
+            function select() {
+                var url = "http://localhost:3000/demo/select";
+                $.get(url, function (result) {
+                    var dataList  = result.dataList;
+                    console.log(dataList)
+                    var html = '';
+                    for (var item in dataList){
+                        console.log(dataList[item].name)
+                        html+='<tr><td class="text-center">'+dataList[item]._id+'</td><td class="text-center">'+dataList[item].name+'</td></tr>'
+                    }
+                    $("#datacontent").append(html);
+                });
+
+            }
 block content
+    h1= title
     button.btn.btn-default.confirm(onclick='select()') 点击我
     div.table_content
-      table.table.table-hover.table-bordered
-        thead
-          tr
-            th.text-center id
-            th.text-center 名称
-        tbody
-          -each item in title
-            tr
-                td.text-center #{item._id}
-                td.text-center #{item.name}
+        table.table.table-hover.table-bordered
+            thead
+                tr
+                    th.text-center id
+                    th.text-center 名称
+            tbody#datacontent
+
+
+

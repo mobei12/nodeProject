@@ -6,10 +6,9 @@ var express = require('express');
 var router = express.Router();
 
 
-router.get('/select',function (request,respond,next) {
-    console.log("11")
+router.get('/select',function (request,respond) {
     mongodbUtils.selectData({},'user',function (result) {
-        respond.json(result);
+        respond.send({dataList: result });
     });
 });
 router.get('/',function (request,respond,next) {
