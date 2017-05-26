@@ -11,7 +11,7 @@ html
             $(function () {
                 select()
             })
-            function select() {
+            function select() {//查询全部
                 var url = "/demo/select";//路由地址
                 $.get(url, function (result) {
                     var dataList = result.dataList;
@@ -23,7 +23,7 @@ html
                             html += '<td>' + dataList[item].name + '</td>';
                             html += '<td>';
                             html += '<button class= "btn btn-default btn-sm" onclick ="edit(\'' + dataList[item]._id + '\')">修改</button>';
-                            html += '<button class= "btn btn-default btn-sm">删除</button>';
+                            html += '<button class= "btn btn-default btn-sm" onclick ="deleteById(\''+ dataList[item]._id +'\')">删除</button>';
                             html += '</td>';
                             html += '/<tr>';
                         }
@@ -33,7 +33,7 @@ html
                 });
 
             }
-            function edit(id) {
+            function edit(id) {//查询要修改的
                 var url = "/demo/selectById";//路由地址
                 var data = {};
                 data.id = id
@@ -44,7 +44,7 @@ html
                     }
                 })
             }
-            function save(el) {
+            function save(el) {//保存修改
                 var inputDom =  $(el).siblings("div.form-group").children('input');
                 var id =  $(inputDom).attr('dataId');
                 var val =  $(inputDom).val();
@@ -65,6 +65,35 @@ html
                 }
 
             }
+            function confirm(el) {
+                var inputDom = $(el).siblings("div.form-group").children('input');
+                var val = $(inputDom).val();
+                if (val) {
+                    var url = "/demo/addData";//路由地址
+                    var data = {};
+                    data.name = val;
+                    $.post(url, data, function (result) {
+                        if (result.success) {
+                            if (result.success) {
+                                location.reload();
+                            }
+                        }
+                    })
+                } else {
+                    alert("请输入内容！");
+                }
+            }
+            function deleteById(id) {
+                var url = "/demo/deleteById";//路由地址
+                var data = {};
+                data.id = id
+                $.post(url, data, function (result) {
+                    if (result.success) {
+                        alert("删除成功！")
+                        location.reload();
+                    }
+                })
+            }
 block content
     div.table_content
         table.table.table-hover.table-bordered
@@ -76,10 +105,19 @@ block content
             tbody#datacontent
     div.edit_content
         form#submit.form-inline
+            h4 修改
             div.form-group
                 label name
                 input#name.form-control(type='text' name='name' placeholder='请输入名字' )
             button.btn.btn-default(type='button' onclick='save(this)') 保存
+
+    div.add_content
+        form.form-inline
+            h4 新增
+            div.form-group
+                label name
+                input.name.form-control(type='text' name='name' placeholder='请输入名字')
+            button.btn.btn-default(type='button' onclick='confirm(this)') 提交
 
 
 

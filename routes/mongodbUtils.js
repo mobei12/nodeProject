@@ -51,13 +51,41 @@ var findOne = function (id, collectionName,callback) {
 var updateOne = function (id,keys, collectionName,callback) {
     var collection = db.get(collectionName);
     collection.update({_id:id},keys).then(function (err,cursor) {
-        if(err){throw err};
+        if(err){
+            throw err
+        };
         callback(cursor[0]);
         db.close();
     });
 };
+/*新增
+*
+* */
+var insert = function (keys,collectionName,callback) {
+    var collection = db.get(collectionName);
+    collection.insert(keys,function (err,cursor) {
+        if(err){
+            throw  err;
+        }
+        db.close();
+        callback(cursor);
+    })
+
+};
+var deleteById = function (id,collectionName,callback) {
+    var collection = db.get(collectionName);
+    collection.delete({_id:id},function (err,cursor) {
+        if(err){
+            throw err;
+        }
+        db.close();
+        callback(cursor);
+    })
+}
 module.exports = {
     findALL: findALL,
     findOne: findOne,
-    updateOne:updateOne
+    updateOne:updateOne,
+    insert:insert,
+    deleteById:deleteById
 };

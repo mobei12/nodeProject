@@ -25,6 +25,22 @@ router.post('/editById', function (request, respond) {
         respond.send({success:'success'});
     });
 });
+router.post('/addData', function (request, respond) {
+    var name = request.body.name;
+    mongodbUtils.insert({name:name}, 'user', function (result) {
+        respond.send({success:'success'});
+    });
+});
+router.post('/deleteById', function (request, respond) {
+    var id = request.body.id;
+    mongodbUtils.deleteById(id, 'user', function (result) {
+        respond.send({success:'success'});
+    });
+});
+
+/*
+* 初始化页面
+* */
 router.get('/', function (request, respond, next) {
     respond.render('demo', {title: "123"});
 });
