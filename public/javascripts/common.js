@@ -1,6 +1,6 @@
 //系统参数
 var SYSTEM = {};
-SYSTEM.HOST= '';
+SYSTEM.HOST= 'http://localhost:3000';
 
 /**
  * 重写 jQuery post 方法
@@ -11,6 +11,8 @@ SYSTEM.HOST= '';
  * @returns {*}
  */
 jQuery["post"] = function(url, data, callback, type) {
+    url = SYSTEM.HOST + url;
+    console.log(url)
     type = type || "json";
     if (jQuery.isFunction(data)) {
         type = type || callback;
@@ -49,7 +51,6 @@ $.ajaxSetup({cache: false,
     error: function (XMLHttpRequest, textStatus, errorThrown) {
         // 登入超时
         if (XMLHttpRequest.status == "401") {
-            //window.top.location.href = sysResPath+"/admin/login.jsp?fromUrl="+window.top.location.href;
             console.log("网络异常");
         } else {
             if(XMLHttpRequest.responseText){

@@ -9,32 +9,78 @@ html
         script(src='/javascripts/common.js')
         script(type='text/javascript').
             $(function () {
+                select()
             })
-
             function select() {
-                var url = "http://localhost:3000/demo/select";
+                var url = "/demo/select";//路由地址
                 $.get(url, function (result) {
-                    var dataList  = result.dataList;
-                    console.log(dataList)
-                    var html = '';
-                    for (var item in dataList){
-                        console.log(dataList[item].name)
-                        html+='<tr><td class="text-center">'+dataList[item]._id+'</td><td class="text-center">'+dataList[item].name+'</td></tr>'
+                    var dataList = result.dataList;
+                    if(result.success){
+                        var html = '';
+                        for (var item in dataList) {
+                            html += '<tr>';
+                            html += '<td >' + dataList[item]._id + '</td>';
+                            html += '<td>' + dataList[item].name + '</td>';
+                            html += '<td>';
+                            html += '<button class= "btn btn-default btn-sm" onclick ="edit(\'' + dataList[item]._id + '\')">修改</button>';
+                            html += '<button class= "btn btn-default btn-sm">删除</button>';
+                            html += '</td>';
+                            html += '/<tr>';
+                        }
+                        $("#datacontent").html(html);
                     }
-                    $("#datacontent").append(html);
+
                 });
 
             }
+            function edit(id) {
+                var url = "/demo/selectById";//路由地址
+                var data = {};
+                data.id = id
+                $.post(url, data, function (result) {
+                    if(result.success){
+                        $("#name").val(result.data.name);
+                        $("#name").attr("dataId",result.data._id);
+                    }
+                })
+            }
+            function save(el) {
+                var inputDom =  $(el).siblings("div.form-group").children('input');
+                var id =  $(inputDom).attr('dataId');
+                var val =  $(inputDom).val();
+                if(id){
+                    var url = "/demo/editById";//路由地址
+                    var data = {};
+                    data.id = id;
+                    data.name = val;
+                    $.post(url, data, function (result) {
+                        if (result.success) {
+                            if(result.success){
+                                location.reload();
+                            }
+                        }
+                    })
+                }else {
+                    alert("请选择要修改的内容！");
+                }
+
+            }
 block content
-    h1= title
-    button.btn.btn-default.confirm(onclick='select()') 点击我
     div.table_content
         table.table.table-hover.table-bordered
             thead
                 tr
-                    th.text-center id
-                    th.text-center 名称
+                    th id
+                    th 名称
+                    th 操作
             tbody#datacontent
+    div.edit_content
+        form#submit.form-inline
+            div.form-group
+                label name
+                input#name.form-control(type='text' name='name' placeholder='请输入名字' )
+            button.btn.btn-default(type='button' onclick='save(this)') 保存
+
 
 
 
