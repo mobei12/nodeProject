@@ -12,6 +12,7 @@ var findALL = function (collectionName, callback) {
         if (err) {
             console.log(err);
         }
+        db.close();
         callback(cursor);
     })
 };
@@ -25,22 +26,22 @@ var findALL = function (collectionName, callback) {
         if (err) {
             console.log(err);
         }
-        callback(cursor)
         db.close();
+        callback(cursor)
     });
 };
 /*id查询
  collectionName：表明
  callback：返回值
  */
-var findOne = function (id, collectionName,callback) {
+var findOne = function (id, collectionName, callback) {
     var collection = db.get(collectionName);
-    collection.find({_id:id},function (err,cursor) {
-        if(err){
+    collection.find({_id: id}, function (err, cursor) {
+        if (err) {
             console.log(err);
         }
-        callback(cursor[0]);
         db.close();
+        callback(cursor[0]);
     });
 };
 /*id修改
@@ -48,23 +49,24 @@ var findOne = function (id, collectionName,callback) {
  collectionName：表明
  callback：返回值
  */
-var updateOne = function (id,keys, collectionName,callback) {
+var updateOne = function (id, keys, collectionName, callback) {
     var collection = db.get(collectionName);
-    collection.update({_id:id},keys).then(function (err,cursor) {
-        if(err){
+    collection.findOneAndUpdate({_id: id}, keys, function (err, cursor) {
+        console.log("!!!" + err);
+        if (err) {
             throw err
-        };
-        callback(cursor[0]);
+        }
         db.close();
+        callback(cursor);
     });
 };
 /*新增
-*
-* */
-var insert = function (keys,collectionName,callback) {
+ *
+ * */
+var insert = function (keys, collectionName, callback) {
     var collection = db.get(collectionName);
-    collection.insert(keys,function (err,cursor) {
-        if(err){
+    collection.insert(keys, function (err, cursor) {
+        if (err) {
             throw  err;
         }
         db.close();
@@ -72,20 +74,20 @@ var insert = function (keys,collectionName,callback) {
     })
 
 };
-var deleteById = function (id,collectionName,callback) {
+var deleteById = function (id, collectionName, callback) {
     var collection = db.get(collectionName);
-    collection.delete({_id:id},function (err,cursor) {
-        if(err){
+    collection.findOneAndDelete({_id: id}, function (err, cursor) {
+        if (err) {
             throw err;
         }
         db.close();
         callback(cursor);
-    })
-}
+    });
+};
 module.exports = {
     findALL: findALL,
     findOne: findOne,
-    updateOne:updateOne,
-    insert:insert,
-    deleteById:deleteById
+    updateOne: updateOne,
+    insert: insert,
+    deleteById: deleteById
 };
