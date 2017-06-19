@@ -21,6 +21,7 @@
     "superagent": "^3.5.2",
     "cheerio": "^0.22.0",
     "async": "^2.4.1",
-    "eventproxy":"^0.3.5"
+    "eventproxy":"^0.3.5",
+    "utility":"^1.12.0"
   }
 }
