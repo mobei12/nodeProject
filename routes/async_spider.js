@@ -12,7 +12,7 @@ var fetchUrl = function (url,callback) {
         callback(null, url + ' html content');
     }, delay);
 
-}
+};
 var urls = [];
 for(var i = 0; i < 30; i++) {
     urls.push('http://datasource_' + i);
