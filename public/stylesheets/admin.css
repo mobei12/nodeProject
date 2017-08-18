@@ -1,0 +1,26 @@
+/*Angular练习*/
+a { color: #00B7FF; }
+
+div.x-view-full { width: 100%; height: 100%; }
+
+div.x-project-header { display: inline-block; position: absolute; border: 1px solid #E4E4E4; background: #F2F2F2; width: 100%; height: 60px; left: 0px; top: 0px; }
+
+div.x-sidemenu { display: inline-block; position: absolute; border: 1px solid #E4E4E4; background: #F2F2F2; left: 0px; top: 66px; width: 160px; height: 600px; }
+
+div.x-contents { display: inline-block; position: absolute; left: 170px; top: 66px; min-width: 200px; min-height: 200px; }
+
+div.x-sidemenu-one{ margin-left: 8px; }
+
+div.x-sidemenu-two{ margin-left: 14px; font-size: 14px; }
+
+p.sidemenu-one{ font-size: 18px; font-weight: bold; color: black; }
+
+.sidemenu-button{ font-size: 14px; border: 0px; margin-bottom: 6px; background: #F2F2F2; }
+
+.sidemenu-button:hover {background-color: #218fd5;}
+
+#x-project-title{ position: absolute; display: inline-block; top: 20px; left: 20px; font-size: 28px; font-weight: bold; width: 200px; }
+
+#x-login-user{ position: absolute; display: inline-block; top: 30px; right: 10px; width: 200px; text-align: right; }
+
+div.admin-addUser{ position: relative; top: 4px; left: 10px; width: auto; height: auto; }

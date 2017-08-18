@@ -2,6 +2,7 @@
  * Created by jjh on 2017/6/23.
  */
 var express = require('express');
+var app = express();
 var router = express.Router();
 
 // middleware that is specific to this router

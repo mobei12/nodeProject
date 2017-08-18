@@ -1,10 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>$Title$</title>
+    <title>vue-demo</title>
+    <style>
+
+        #app {
+            text-align: center;
+            font-size: 20px;
+            padding: 20px
+        }
+    </style>
 </head>
 <body>
-$END$
+<div id="app">
+    <p>{{ message }}</p>
+    <p>{{remessage}}</p>
+    <input v-if="show" v-model="message"/><!-- v-if逻辑判断是否显示-->
+    <button @click="aclick">{{text}}</button><!-- v-on（@是缩写）绑定事件 -->
+    <ul>
+        <li v-for="(item,key,index) in items"><!-- v-for 循环遍历数组 in 作为分隔符-->
+            {{index}}---{{key}}:{{item.item}}
+        </li>
+        <li v-for="(item,index) of items"><!-- v-for 循环遍历数组 of 作为分隔符-->
+            {{index}}---{{item.item}}
+        </li>
+    </ul>
+</div>
+
 </body>
+<script src="./javascripts/vue.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            message: 'testvue',
+            show: false,
+            text: '显示输入框',
+            items:[
+                {item:'数据1'},
+                {item:'数据2'}
+            ]
+        },
+        methods: {
+            aclick: function (e) {
+                if (this.show == false) {
+                    this.show = true;
+                    this.text = '隐藏输入框';
+                } else {
+                    this.show = false;
+                    this.text = '显示输入框';
+                }
+            }
+        },
+        computed: {
+            remessage: function (e) {
+                return this.message.split('').reverse().join('');
+            }
+        }
+    })
+</script>
 </html>
