@@ -20,8 +20,8 @@
   * 建立链接
   */
  connection.connect();
- const 
- connection.query('SELECT * FROM t_apply_approve',function(error,results,fields){
+ const query = 'SELECT * FROM t_apply_approve'
+ connection.query(query,function(error,results,fields){
      if(error) throw error;
      console.log("数据",results)
  })
