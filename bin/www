@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 /**
- * Module dependencies.
+ * Module dependencies.(模板依赖关系)
  */
 
 var app = require('../app');
@@ -9,20 +9,21 @@ var debug = require('debug')('nodeproject:server');
 var http = require('http');
 
 /**
- * Get port from environment and store in Express.
+ * Get port from environment and store in Express.(从环境中获取端口并存储)
  */
 
 var port = normalizePort(process.env.PORT || '3000');
+console.log('服务已经在:'+'http://localhost:'+port+'启动');
 app.set('port', port);
 
 /**
- * Create HTTP server.
+ * Create HTTP server.(建立HTTP服务)
  */
 
 var server = http.createServer(app);
 
 /**
- * Listen on provided port, on all network interfaces.
+ * Listen on provided port, on all network interfaces.(在网络接口上监听提供的端口)
  */
 
 server.listen(port);
@@ -30,19 +31,19 @@ server.on('error', onError);
 server.on('listening', onListening);
 
 /**
- * Normalize a port into a number, string, or false.
+ * Normalize a port into a number, string, or false.(将端口标准化为数字、字符或false)
  */
 
 function normalizePort(val) {
   var port = parseInt(val, 10);
 
   if (isNaN(port)) {
-    // named pipe
+    // named pipe(命名管道)
     return val;
   }
 
   if (port >= 0) {
-    // port number
+    // port number(端口号)
     return port;
   }
 
@@ -50,7 +51,7 @@ function normalizePort(val) {
 }
 
 /**
- * Event listener for HTTP server "error" event.
+ * Event listener for HTTP server "error" event.(HTTP服务器“错误”事件的事件侦听器)
  */
 
 function onError(error) {
@@ -62,7 +63,7 @@ function onError(error) {
     ? 'Pipe ' + port
     : 'Port ' + port;
 
-  // handle specific listen errors with friendly messages
+  // handle specific listen errors with friendly messages(用友好的消息处理特定的监听错误)
   switch (error.code) {
     case 'EACCES':
       console.error(bind + ' requires elevated privileges');
@@ -78,7 +79,7 @@ function onError(error) {
 }
 
 /**
- * Event listener for HTTP server "listening" event.
+ * Event listener for HTTP server "listening" event.(HTTP服务器“侦听”事件的事件侦听器。)
  */
 
 function onListening() {
