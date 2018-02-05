@@ -35,7 +35,6 @@ router.post('/addData', function (request, response) {
     hash.update('123');
     var data = request.body;
     data.pwd = hash.digest('hex');
-    console.log(data);
     mongodbUtils.insert(data, 'user', function (result) {
         response.send({success: 'success'});
     });

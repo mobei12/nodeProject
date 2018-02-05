@@ -1,6 +1,6 @@
 //引入monk的模块
 const monk = require('monk');
-const db = monk('localhost:27017/learn_db');
+const db = monk('localhost:27017/aaa');
 
 
 /*查询全部
