@@ -15,7 +15,6 @@ for (var i = 0; i < pageNum; i += 25) {
     pageUrls.push('https://movie.douban.com/top250?start=' + i + '&filter=');//要爬的网站地址
 }
 pageUrls.forEach(function (pageUrl,index) {
-    console.log(index)
     superagent.get(pageUrl)//用superagent发送get网络请求
         .end(function (err, pres) {
             /* pres.text 里面存储着请求返回的 html 内容，将它传给 cheerio.load 之后
